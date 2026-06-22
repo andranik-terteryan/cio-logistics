@@ -1,0 +1,217 @@
+@use '../abstracts' as *;
+
+.app-footer {
+    background-color: $color-black;
+    padding: 84px 0 24px 0;
+    border-top: 2px solid $color-red;
+
+    &__left {
+        max-width: 232px;
+        width: 100%;
+        margin-right: 75px;
+
+        @media only screen and (max-width: 1250px) {
+            margin-right: 25px;
+            max-width: 220px;
+        }
+
+        @media only screen and (max-width: 1024px) {
+            max-width: 100%;
+            margin-right: 0px;
+            margin-bottom: 24px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            margin-bottom: 0px;
+        }
+    }
+
+    &__logo {
+        display: block;
+        max-width: 98px;
+        max-height: 36px;
+    }
+
+    &__text {
+        margin-top: 22px;
+        @include fontRem(14, 400, 22);
+        color: rgba($color-white, .7);
+    }
+
+    &__media {
+        @include flex-center-vert;
+        gap: 12px;
+        margin-top: 26px;
+
+        li {
+            width: 38px;
+            height: 38px;
+            background-color: rgba($color-white, .08);
+            border-radius: 8px;
+            @include flex-center;
+        }
+    }
+
+    &__panel {
+        @include d-flex;
+        justify-content: space-between
+    }
+
+    &__headline {
+        @include fontRem(14, 700, 17.5);
+        color: $color-white;
+    }
+
+    &__navigation {
+        ul {
+            margin-top: 20px;
+
+            li {
+                &:not(:first-child) {
+                    margin-top: 19px;
+                }
+
+                a {
+                    @include fontRem(14, 400, 22);
+                    color: rgba($color-white, .7);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    &__menu {
+        margin-right: 48px;
+
+        @media only screen and (max-width: 1250px) {
+            margin-right: 25px;
+        }
+
+        @media only screen and (max-width: 1024px) {
+            margin-right: 15px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            max-width: 100%;
+            width: 100%;
+            margin-right: 0px;
+            margin-top: 44px;
+        }
+
+    }
+
+    &__right {
+        max-width: 222px;
+        width: 100%;
+
+        @media only screen and (max-width: 1250px) {
+            max-width: 200px;
+        }
+
+
+        @media only screen and (max-width: 768px) {
+            max-width: 100%;
+            margin-top: 44px;
+        }
+    }
+
+    &__badges {
+        margin-top: 60px;
+        padding: 24px 0;
+        border-top: 1px solid rgba($color-white, .1);
+        border-bottom: 1px solid rgba($color-white, .1);
+        @media only screen and (max-width: 768px){
+            margin-top: 24px;
+        }
+        ul {
+            @include d-flex;
+            gap: 15px;
+
+            li {
+                @include fontRem(16, 400, 25);
+                color: rgba($color-white, .7);
+            }
+        }
+    }
+
+    &__aditional-links {
+        @include d-flex;
+        justify-content: space-between;
+        padding-top: 48px;
+        @media only screen and (max-width: 768px){
+            flex-direction: column;
+            gap: 10px;
+        }
+        ul {
+            @include d-flex;
+
+            li {
+                &:not(:last-child) {
+                    margin-right: 23px;
+                }
+
+                a {
+                    color: rgba($color-white, .5);
+                    @include fontRem(13, 400, 20);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .copyright {
+        @include fontRem(13, 400, 20);
+        color: rgba($color-white, .7);
+    }
+
+
+    .wpcf7 {
+        margin-top: 26px;
+    }
+
+    .wpcf7 .wpcf7-form-control-wrap {
+        display: block;
+    }
+
+    .wpcf7 input[type="email"] {
+        width: 100%;
+        background: rgba($color-white, .06);
+        border: 1.5px solid rgba($color-white, .15);
+        border-radius: 10px;
+        color: $color-white;
+        padding: 15px 17px;
+        outline: none;
+        transition: border-color 0.2s ease;
+        @include fontRem(14, 400, 14);
+    }
+
+    .wpcf7 input[type="email"]::placeholder {
+        color: #7a85a0;
+    }
+
+    .wpcf7 input[type="email"]:focus {
+        border-color: #5a6aaa;
+    }
+
+    .wpcf7 input[type="submit"] {
+        width: 100%;
+        background: $color-red;
+        color: $color-white;
+        padding: 16px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        letter-spacing: 0.3px;
+        transition: background 0.2s ease, transform 0.1s ease;
+        @include fontRem(15, 600, 24);
+    }
+
+    .wpcf7 input[type="submit"]:hover {
+        background: #c82828;
+        transform: translateY(-1px);
+    }
+
+    .wpcf7 input[type="submit"]:active {
+        transform: translateY(0);
+    }
+}

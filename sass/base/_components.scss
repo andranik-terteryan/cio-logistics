@@ -1,0 +1,303 @@
+@use '../abstracts' as *;
+
+.primary-button {
+    @include buttonNulled;
+    display: block;
+    padding: 17px 30px;
+    border-radius: 100px;
+    @include fontRem(15, 600, 18);
+    position: relative;
+    overflow: hidden;
+    transition: color 0.35s ease;
+
+    @media only screen and (max-width: 992px) {
+        @include fontRem(12, 600, 15);
+    }
+
+    // Shared pseudo-element base
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 100px;
+        z-index: 0;
+    }
+
+    // Keeps text above the pseudo-element
+    >* {
+        position: relative;
+        z-index: 1;
+    }
+
+    // ── Outlined: horizontal ink sweep left → right ──────────
+    &--outlined {
+        border: 2px solid $color-black-havy;
+        color: $color-black-havy;
+
+        &::before {
+            background: $color-black-havy;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.77, 0, 0.18, 1);
+        }
+
+        &:hover {
+            color: $color-white;
+
+            &::before {
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    // ── Filled: darkening depth press from center ─────────────
+    &--filled {
+        background-color: $color-red;
+        color: $color-white;
+        border: 1px solid transparent;
+        transition: transform 0.15s ease;
+
+        &::before {
+            background: rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            transform: scale(0.7);
+            transition:
+                opacity 0.3s ease,
+                transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        &:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+}
+
+.calculator {
+    background: $color-white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 371px;
+    padding: 48px 21px 21px 21px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, .38);
+    flex: 1;
+
+    @media only screen and (max-width: 1024px) {
+        max-width: 362px;
+    }
+
+    @media only screen and (max-width: 992px) {
+        max-width: 320px;
+        padding-top: 24px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        max-width: 100%;
+        margin-top: 24px;
+    }
+
+    &__subtitle {
+        text-align: center;
+        color: $label-gray;
+        @include fontRem(12, 400, 19);
+    }
+
+    &__grid {
+        @include flex-column;
+        margin-top: 14px;
+    }
+}
+
+.field {
+    margin-bottom: 10px;
+    position: relative;
+
+    &__label {
+        display: block;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+        @include fontRem(10, 700, 16);
+        color: $color-black-havy;
+    }
+
+    &__select {
+        width: 100%;
+        background: $color-white-soft;
+        border: 1.5px solid $color-white-havy;
+        border-radius: 10px;
+        padding: 8px 26px 8px 14px;
+        color: $charcoal;
+        appearance: none;
+        @include fontRem(13, 400, 16);
+        cursor: pointer;
+        outline: none;
+        transition: border-color .2s;
+
+        &:focus {
+            border-color: $color-red;
+        }
+    }
+}
+
+.slider {
+    margin-bottom: 15px;
+
+    &__header {
+        @include flex-center-vert;
+        justify-content: space-between;
+        margin-bottom: 2.5px;
+    }
+
+    &__label {
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+        color: $charcoal;
+    }
+
+    &__value {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: $color-red;
+    }
+
+    &__input {
+        width: 100%;
+        appearance: none;
+        height: 4px;
+        border-radius: 2px;
+        background: linear-gradient(to right,
+                $color-red var(--pct, 2%),
+                $color-white-havy var(--pct, 2%));
+        outline: none;
+        cursor: pointer;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: $color-red;
+            box-shadow: 0 2px 8px rgba($color-red, .45);
+            transition: transform .15s;
+
+            &:active {
+                transform: scale(1.2);
+            }
+        }
+
+        &::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: $color-red;
+            border: none;
+            box-shadow: 0 2px 8px rgba($color-red, .45);
+        }
+    }
+}
+
+.result {
+    background: $color-black;
+    border-radius: 10px;
+    padding: 16px 17px;
+    box-shadow: 0px 4px 6px -2px #0F1B240D;
+    box-shadow: 0px 10px 15px -3px #0F1B241A;
+
+    &__label {
+        text-align: center;
+        text-transform: uppercase;
+        color: $color-red;
+        margin-bottom: 12px;
+        @include fontRem(11, 700, 17);
+        letter-spacing: 1px;
+    }
+
+    &__price {
+        text-align: center;
+        color: $color-white;
+        margin-bottom: 12px;
+        @include fontRem(22, 800, 35);
+        transition: opacity .2s;
+    }
+
+    &__transit {
+        @include flex-center;
+        gap: 6px;
+        color: rgba($color-white, .7);
+        margin-bottom: 12px;
+        @include fontRem(12, 400, 19);
+
+        svg {
+            opacity: .65;
+            flex-shrink: 0;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+    }
+
+    &__divider {
+        border: none;
+        border-top: 1px solid rgba($color-white, .1);
+        margin-bottom: 13px;
+    }
+
+    &__lines {
+        @include flex-column;
+        gap: 9px;
+        margin-bottom: 12px;
+    }
+
+    &__line {
+        @include d-flex;
+        justify-content: space-between;
+        @include fontRem(12, 400, 19);
+        color: rgba($color-white, .8);
+
+        &-value {
+            font-weight: 700;
+            transition: opacity .2s;
+        }
+    }
+
+    .primary-button {
+        width: 100%;
+        line-height: 20px;
+
+        @media only screen and (max-width: 992px) {
+            font-size: 12px;
+        }
+    }
+
+    &__disclaimer {
+        gap: 6px;
+        margin-top: 16px;
+        color: rgba($color-white, .4);
+        text-align: center;
+        @include fontRem(10, 400, 14);
+        @include d-flex;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        svg {
+            flex-shrink: 0;
+            opacity: .7;
+        }
+    }
+
+    &--updating {
+
+        .result__price,
+        .result__line-value {
+            opacity: .3;
+        }
+    }
+}

@@ -1,0 +1,401 @@
+@use '../abstracts' as *;
+
+.app-header {
+   background-color: $color-white-havy;
+
+   &__top {
+      background-color: $color-black;
+   }
+
+   &__main-panel {
+      padding: 16px 0;
+      @include flex-center-vert;
+      justify-content: space-between;
+   }
+
+   &__actions {
+      @include flex-center-vert;
+      gap: 12px;
+
+      @media only screen and (max-width: 1250px) {
+         gap: 8px;
+      }
+
+      @media only screen and (max-width: 1024px) {
+         margin-left: auto;
+         margin-right: 12px;
+      }
+
+      .primary-button {
+         @media only screen and (max-width: 1250px) {
+            padding-left: 24px;
+            padding-right: 24px;
+         }
+
+         @media only screen and (max-width: 768px) {
+            padding: 8px;
+         }
+
+         @media only screen and (max-width: 576px) {
+            display: none;
+         }
+      }
+   }
+
+   &__brand {
+      max-width: 114px;
+      width: 100%;
+      max-height: 42px;
+
+      a {
+         display: block;
+         width: 100%;
+         height: 100%;
+      }
+   }
+
+   .hamburger {
+      opacity: 1;
+      cursor: pointer;
+      transition: opacity 0.25s linear;
+      user-select: none;
+      display: none;
+      height: 40px;
+      width: 40px;
+      z-index: 10002;
+      background-color: transparent;
+      outline: none;
+      border: 0;
+      border-radius: 10px;
+
+      @media only screen and (max-width: 1024px) {
+         @include flex-center;
+         background-color: $color-white-soft;
+
+      }
+
+      .hamburger__item:before,
+      .hamburger__item:after {
+         content: "";
+         position: absolute;
+      }
+
+      .hamburger__item,
+      .hamburger__item:after,
+      .hamburger__item::before {
+         border-radius: 10px;
+         width: 16px;
+         height: 2px;
+         transition: all 0.15s linear;
+         background-color: $color-black-havy;
+      }
+
+      .hamburger__item {
+
+         &:before {
+            transform: translateY(-200%);
+         }
+
+         &:after {
+            transform: translateY(200%);
+         }
+      }
+
+      &.is-active {
+         .hamburger__item {
+            background: 0 0;
+         }
+
+         .hamburger__item:before {
+            transform: rotate(45deg);
+            background-color: #C4A76A;
+         }
+
+         .hamburger__item:after {
+            transform: rotate(-45deg);
+            background-color: #C4A76A;
+         }
+      }
+   }
+}
+
+.header-top-actions {
+   padding: 8px 0;
+   @include flex-center-vert;
+   justify-content: space-between;
+   flex-wrap: wrap;
+
+   @media only screen and (max-width: 768px) {
+      align-items: center;
+      justify-content: flex-start;
+   }
+
+   &__list {
+      @include flex-center-vert;
+
+      @media only screen and (max-width: 768px) {
+         width: 100%;
+         max-width: 100%;
+         flex-wrap: wrap;
+         row-gap: 10px;
+      }
+   }
+
+   &__item {
+      &:not(:last-child) {
+         margin-right: 20px;
+
+         @media only screen and (max-width: 992px) {
+            margin-right: 10px;
+         }
+      }
+
+      a {
+         color: $color-white;
+         text-decoration: none;
+         @include fontRem(13, 500, 20);
+         position: relative;
+         display: block;
+         padding-left: 20px;
+         transition: color .3s;
+
+         @media only screen and (max-width: 992px) {
+            @include fontRem(12, 500, 16);
+         }
+
+         &:hover {
+            color: $color-red;
+
+            svg {
+               path {
+                  transition: stroke .3s;
+                  stroke: $color-red;
+
+                  &:hover {
+                     color: $color-red;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   &__icon {
+      display: block;
+      width: 14px;
+      height: 14px;
+      @include absoluteCenter(vertical);
+      left: 0
+   }
+
+   &__customer {
+      @media only screen and (max-width: 768px) {
+         margin-top: 10px;
+      }
+
+      a {
+         display: block;
+         @include fontRem(13, 600, 20);
+         color: rgba($color-white, .9);
+         position: relative;
+         padding-left: 20px;
+         text-decoration: none;
+         transition: color .3s;
+
+         &:hover {
+            color: $color-red;
+
+            svg {
+               path {
+                  transition: stroke .3s;
+                  stroke: $color-red;
+
+                  &:hover {
+                     color: $color-red;
+                  }
+               }
+            }
+         }
+
+         .icon {
+            @include absoluteCenter(vertical);
+            left: 0;
+            width: 14px;
+            height: 14px;
+
+
+
+            svg {
+               width: 100%;
+               height: 100%;
+
+            }
+
+
+         }
+      }
+   }
+}
+
+.lang {
+   @include flex-center-vert;
+   margin: 0 20px 0 auto;
+
+   @media only screen and (max-width: 768px) {
+      margin: 10px 10px 0 0;
+   }
+
+   &__btn {
+      display: block;
+      text-decoration: none;
+      padding: 4px 8px;
+      @include fontRem(12, 700, 16);
+      color: $color-white;
+      background-color: rgba($color-white, .1);
+      border-radius: 4px;
+
+      &.is-active {
+         background-color: $color-red;
+      }
+
+      &:not(:last-child) {
+         margin-right: 4px;
+      }
+   }
+}
+
+.app-navigation {
+   @media only screen and (max-width: 1024px) {
+      position: fixed;
+      transform: translate(-200%);
+      transition: .3s transform;
+      width: 100%;
+      top: 125px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      min-height: calc(100vh - 88px);
+      z-index: 99;
+      left: 0;
+
+      &.is-active {
+         transform: translateX(0%);
+
+      }
+   }
+
+   @media only screen and (max-width: 768px) {
+      top: 140px;
+   }
+
+   @media only screen and (max-width: 486px) {
+      top: 166px;
+   }
+
+   &__list {
+      @include flex-center-vert;
+
+      @media only screen and (max-width: 1024px) {
+         flex-direction: column;
+         padding-top: 25px;
+      }
+
+      &>li {
+         &:not(:last-child) {
+            margin-right: 6px;
+
+            @media only screen and (max-width: 1024px) {
+               margin-right: 0px;
+            }
+         }
+
+         &>a {
+            text-decoration: none;
+            padding: 14px 12px;
+            display: block;
+            @include fontRem(14, 600, 23);
+            color: $color-black;
+            transition: .3s color .3s background;
+            border-radius: 10px;
+
+            @media only screen and (max-width: 1024px) {
+               color: $color-white;
+            }
+
+            &:hover {
+               background-color: $color-white-soft;
+               color: $color-red;
+
+               &::after {
+                  background-image: url('data:image/svg+xml,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4.5L6 7.5L9 4.5" stroke="%23EC1C28" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+
+               }
+            }
+
+            @media only screen and (max-width:1250px) {
+               padding-left: 6px;
+               padding-right: 6px;
+            }
+         }
+
+         &.menu-item-has-children {
+            position: relative;
+
+            a {
+               padding-right: 32px;
+
+               @media only screen and (max-width: 1250px) {
+                  padding-right: 22px;
+               }
+
+               &::after {
+                  content: " ";
+                  background-image: url('data:image/svg+xml,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4.5L6 7.5L9 4.5" stroke="%230F1B24" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                  width: 12px;
+                  height: 12px;
+                  @include absoluteCenter(vertical);
+                  right: 14px;
+
+                  @media only screen and (max-width: 1250px) {
+                     right: 6px;
+                  }
+
+                  @media only screen and (max-width: 1024px) {
+                     background-image: url('data:image/svg+xml,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4.5L6 7.5L9 4.5" stroke="%23ffffff" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                  }
+               }
+
+               &:hover {
+
+                  &::after {
+                     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down Header-module__ldgnoG__caret"><path d="m6 9 6 6 6-6"></path></svg>');
+
+                  }
+               }
+            }
+
+            .sub-menu {
+               display: none;
+
+            }
+         }
+      }
+   }
+}
+
+.search-block {
+
+   &__icon {
+      border-radius: 10px;
+      padding: 11px;
+      background-color: $color-white-soft;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      @include flex-center;
+
+      @media only screen and (max-width: 768px) {
+         padding: 8px;
+      }
+   }
+}
